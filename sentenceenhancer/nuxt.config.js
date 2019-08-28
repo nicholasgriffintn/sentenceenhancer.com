@@ -1,4 +1,7 @@
+const webpack = require("webpack");
+
 module.exports = {
+  mode: 'spa',
   /*
   ** Headers of the page
   */
@@ -13,6 +16,12 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  script: [
+    {
+      src: "https://code.jquery.com/jquery-3.3.1.slim.min.js",
+      type: "text/javascript"
+    },
+  ],
   /*
   ** Customize the progress bar color
   */
@@ -29,6 +38,12 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
+   vendor: ["jquery"],
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: "jquery"
+      })
+    ],
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
